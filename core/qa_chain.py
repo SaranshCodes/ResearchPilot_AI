@@ -13,7 +13,10 @@ def retrieve(query, index, chunks):
     retrieved = []
     for idx in indices[0]:
         retrieved.append(chunks[idx])
-    return '\n'.join(retrieved)
+    
+    context ='\n\n'.join(chunk['text'] for chunk in retrieved)
+    pages = sorted(set(chunk['page'] for chunk in retrieved))
+    return context, pages
 
 
 # Retrieval logic
