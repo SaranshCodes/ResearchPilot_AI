@@ -9,6 +9,9 @@ def create_vector_store(chunks):
     embeddings = np.array(
         embeddings, dtype = 'float32'
     )
-    index = faiss.IndexFlatL2(len(embeddings[0]))
+    dimension = embeddings.shape[1]
+    index = faiss.IndexFlatL2(dimension)
     index.add(embeddings)
     return index, chunks
+
+# in new version , we will change it into Langchain faiss wrapper   

@@ -1,16 +1,10 @@
-from google import genai
-from dotenv import load_dotenv
-import os
+from langchain_ollama import OllamaEmbeddings
 
-load_dotenv()
-client = genai.Client(
-    api_key = os.getenv('GOOGLE_API_KEY')
+embeddings = OllamaEmbeddings(
+    model="qwen3-embedding:latest" 
 )
 
 def get_embedding(text):
-    response = client.models.embed_content(
-        model = 'gemini-embedding-001',
-        contents = text
-    )
-    
-    return response.embeddings[0].values
+    return embeddings.embed_query(text)
+
+# Ollama Embedding
